@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
+set -o pipefail
 cd $(dirname $0)
 
+set +e
 tar_exec=$(command -v gtar)
 if [ $? -ne 0 ]; then
 	tar_exec=$(command -v tar)
 fi
+set -e
 
 download () {
 	curl -L -# -A 'https://github.com/eugeneware/ffmpeg-static' -o $2 $1
